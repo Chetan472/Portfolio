@@ -12,32 +12,37 @@
   const loaderBarFill = document.getElementById('loaderBarFill');
   let progress = 0;
   const loaderInterval = setInterval(() => {
-    progress += Math.random() * 18;
+    progress += Math.random() * 35 + 25;
     if (progress >= 100) {
       progress = 100;
       clearInterval(loaderInterval);
       setTimeout(() => {
-        loader.classList.add('loaded');
+        if (loader) loader.classList.add('loaded');
         document.body.style.overflow = '';
-      }, 350);
+      }, 150);
     }
-    loaderBarFill.style.width = progress + '%';
-  }, 180);
+    if (loaderBarFill) loaderBarFill.style.width = progress + '%';
+  }, 80);
 
   window.addEventListener('load', () => {
-    document.body.style.overflow = 'hidden';
+    document.body.style.overflow = '';
+    if (loader) {
+      setTimeout(() => {
+        loader.classList.add('loaded');
+      }, 200);
+    }
   });
 
   /* ---------------------------------------------------------
      1. INIT LIBRARIES (AOS / Typed.js / Particles.js)
   --------------------------------------------------------- */
   if (window.AOS) {
-    AOS.init({ duration: 800, once: true, offset: 60, easing: 'ease-out-cubic' });
+    AOS.init({ duration: 600, once: true, offset: 40, easing: 'ease-out' });
   }
 
   if (window.Typed) {
     new Typed('#typed-role', {
-      strings: ['Full Stack Developer', 'Java Developer', 'Frontend Developer', 'Software Engineer'],
+      strings: ['Frontend & React.js Developer', 'React.js Developer', 'Frontend Developer', 'JavaScript Developer'],
       typeSpeed: 55,
       backSpeed: 30,
       backDelay: 1400,
@@ -46,34 +51,7 @@
     });
   } else {
     const el = document.getElementById('typed-role');
-    if (el) el.textContent = 'Full Stack Developer';
-  }
-
-  if (window.particlesJS) {
-    particlesJS('particles-js', {
-      particles: {
-        number: { value: 46, density: { enable: true, value_area: 900 } },
-        color: { value: ['#6d5efc', '#b34ff0', '#3fd8c4'] },
-        shape: { type: 'circle' },
-        opacity: { value: 0.35, random: true },
-        size: { value: 2.6, random: true },
-        line_linked: { enable: true, distance: 140, color: '#6d5efc', opacity: 0.15, width: 1 },
-        move: { enable: true, speed: 1, out_mode: 'out' }
-      },
-      interactivity: {
-        detect_on: 'canvas',
-        events: {
-          onhover: { enable: true, mode: 'grab' },
-          onclick: { enable: true, mode: 'push' },
-          resize: true
-        },
-        modes: {
-          grab: { distance: 140, line_linked: { opacity: 0.4 } },
-          push: { particles_nb: 3 }
-        }
-      },
-      retina_detect: true
-    });
+    if (el) el.textContent = 'Frontend & React.js Developer';
   }
 
   /* ---------------------------------------------------------
@@ -90,14 +68,16 @@
   function onScroll(){
     const y = window.scrollY;
 
-    navbar.classList.toggle('scrolled', y > 30);
+    if (navbar) navbar.classList.toggle('scrolled', y > 20);
 
     /* scroll progress bar */
-    const docHeight = document.documentElement.scrollHeight - window.innerHeight;
-    scrollProgress.style.width = docHeight > 0 ? (y / docHeight) * 100 + '%' : '0%';
+    if (scrollProgress) {
+      const docHeight = document.documentElement.scrollHeight - window.innerHeight;
+      scrollProgress.style.width = docHeight > 0 ? (y / docHeight) * 100 + '%' : '0%';
+    }
 
     /* scroll to top visibility */
-    scrollTopBtn.classList.toggle('show', y > 500);
+    if (scrollTopBtn) scrollTopBtn.classList.toggle('show', y > 400);
 
     /* scroll spy */
     let current = 'home';
@@ -112,45 +92,55 @@
   window.addEventListener('scroll', onScroll, { passive: true });
   onScroll();
 
-  hamburger.addEventListener('click', () => {
-    hamburger.classList.toggle('active');
-    navLinks.classList.toggle('open');
-  });
-  navLinkItems.forEach(link => {
-    link.addEventListener('click', () => {
-      hamburger.classList.remove('active');
-      navLinks.classList.remove('open');
+  if (hamburger && navLinks) {
+    hamburger.addEventListener('click', () => {
+      hamburger.classList.toggle('active');
+      navLinks.classList.toggle('open');
     });
-  });
+    navLinkItems.forEach(link => {
+      link.addEventListener('click', () => {
+        hamburger.classList.remove('active');
+        navLinks.classList.remove('open');
+      });
+    });
+  }
 
-  scrollTopBtn.addEventListener('click', () => {
-    window.scrollTo({ top: 0, behavior: 'smooth' });
-  });
+  if (scrollTopBtn) {
+    scrollTopBtn.addEventListener('click', () => {
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    });
+  }
 
   /* ---------------------------------------------------------
-     3. THEME TOGGLE (dark / light)
+     3. THEME TOGGLE (default: light, toggle: dark)
   --------------------------------------------------------- */
   const themeToggle = document.getElementById('themeToggle');
-  const themeIcon = themeToggle.querySelector('i');
-  const savedTheme = localStorageSafeGet('portfolio-theme') || 'dark';
+  const themeIcon = themeToggle ? themeToggle.querySelector('i') : null;
+  const savedTheme = localStorageSafeGet('portfolio-theme') || 'light';
   applyTheme(savedTheme);
 
-  themeToggle.addEventListener('click', () => {
-    const current = document.documentElement.getAttribute('data-theme') === 'light' ? 'light' : 'dark';
-    const next = current === 'light' ? 'dark' : 'light';
-    applyTheme(next);
-    localStorageSafeSet('portfolio-theme', next);
-  });
+  if (themeToggle) {
+    themeToggle.addEventListener('click', () => {
+      const current = document.documentElement.getAttribute('data-theme') === 'dark' ? 'dark' : 'light';
+      const next = current === 'dark' ? 'light' : 'dark';
+      applyTheme(next);
+      localStorageSafeSet('portfolio-theme', next);
+    });
+  }
 
   function applyTheme(theme){
-    if (theme === 'light') {
-      document.documentElement.setAttribute('data-theme', 'light');
-      themeIcon.classList.remove('fa-moon');
-      themeIcon.classList.add('fa-sun');
+    if (theme === 'dark') {
+      document.documentElement.setAttribute('data-theme', 'dark');
+      if (themeIcon) {
+        themeIcon.classList.remove('fa-moon');
+        themeIcon.classList.add('fa-sun');
+      }
     } else {
       document.documentElement.removeAttribute('data-theme');
-      themeIcon.classList.remove('fa-sun');
-      themeIcon.classList.add('fa-moon');
+      if (themeIcon) {
+        themeIcon.classList.remove('fa-sun');
+        themeIcon.classList.add('fa-moon');
+      }
     }
   }
 
@@ -166,10 +156,10 @@
      4. CURSOR GLOW + TRAIL (fine-pointer devices only)
   --------------------------------------------------------- */
   const isFinePointer = window.matchMedia('(pointer:fine)').matches;
-  if (isFinePointer) {
+  const glow = document.getElementById('cursorGlow');
+  const dot = document.getElementById('cursorDot');
+  if (isFinePointer && glow && dot) {
     document.body.classList.add('has-fine-pointer');
-    const glow = document.getElementById('cursorGlow');
-    const dot = document.getElementById('cursorDot');
     let mouseX = 0, mouseY = 0, dotX = 0, dotY = 0;
 
     window.addEventListener('mousemove', e => {

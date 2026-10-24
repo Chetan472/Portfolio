@@ -6,21 +6,54 @@
 <title>404 — Page Not Found | Chetan Teli</title>
 <meta name="robots" content="noindex">
 <link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&family=JetBrains+Mono:wght@500;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&family=JetBrains+Mono:wght@500;700&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
 <link rel="stylesheet" href="css/style.css">
 <link rel="stylesheet" href="css/responsive.css">
 <style>
-  body{display:flex;align-items:center;justify-content:center;min-height:100vh;text-align:center;
-    background:radial-gradient(circle at 20% 20%,rgba(109,94,252,0.14),transparent 45%),
-               radial-gradient(circle at 80% 80%,rgba(179,79,240,0.12),transparent 45%),var(--bg-void);}
-  .error-wrap{padding:32px;max-width:560px;}
-  .error-code{font-family:var(--font-mono);font-size:clamp(4rem,14vw,7rem);font-weight:700;
-    background:var(--gradient);-webkit-background-clip:text;background-clip:text;color:transparent;line-height:1;}
-  .error-wrap h1{margin:18px 0 12px;font-size:1.5rem;}
-  .error-wrap p{color:var(--text-mid);margin-bottom:32px;}
-  .error-code-line{font-family:var(--font-mono);font-size:.85rem;color:var(--text-low);
-    background:var(--glass);border:1px solid var(--glass-border);border-radius:10px;padding:14px 18px;margin-bottom:32px;text-align:left;}
+  body {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 100vh;
+    text-align: center;
+    background-color: var(--bg-body);
+    color: var(--text-main);
+  }
+  .error-wrap {
+    padding: 32px;
+    max-width: 520px;
+  }
+  .error-code {
+    font-family: var(--font-mono);
+    font-size: clamp(3.5rem, 12vw, 5.5rem);
+    font-weight: 700;
+    color: var(--accent);
+    line-height: 1;
+    margin-bottom: 12px;
+  }
+  .error-wrap h1 {
+    margin: 14px 0 10px;
+    font-size: 1.4rem;
+    font-weight: 600;
+  }
+  .error-wrap p {
+    color: var(--text-muted);
+    font-size: 0.95rem;
+    margin-bottom: 24px;
+    line-height: 1.6;
+  }
+  .error-code-line {
+    font-family: var(--font-mono);
+    font-size: 0.82rem;
+    color: var(--text-light);
+    background: var(--bg-alt);
+    border: 1px solid var(--border-color);
+    border-radius: var(--radius-sm);
+    padding: 12px 16px;
+    margin-bottom: 26px;
+    text-align: left;
+  }
 </style>
 </head>
 <body>
@@ -28,7 +61,7 @@
     <div class="error-code">404</div>
     <div class="error-code-line">Exception in thread "main": PageNotFoundException — route does not exist.</div>
     <h1>This page took a wrong turn.</h1>
-    <p>The page you're looking for doesn't exist or may have moved. Let's get you back on track.</p>
+    <p>The page you're looking for doesn't exist or may have moved. Let's get you back to the portfolio.</p>
     <a href="index.html" class="btn btn-primary"><i class="fa-solid fa-house"></i> Back to Home</a>
   </div>
 </body>
