@@ -626,40 +626,80 @@ html[data-theme="light"] .internship-card { background: rgba(255,255,255,0.8); }
 .duration { color: var(--text-muted); margin-bottom: 10px; }
 .internship-info p:last-child { color: var(--text-muted); }
 
+.certifications {
+  position: relative;
+  isolation: isolate;
+}
+.certifications::before {
+  content: "";
+  position: absolute;
+  inset: 6% 12% auto;
+  height: 220px;
+  background: radial-gradient(circle, rgba(96,165,250,0.18), rgba(96,165,250,0.04) 40%, transparent 70%);
+  filter: blur(28px);
+  z-index: -1;
+}
 .certifications-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-  gap: 20px;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap: 24px;
 }
 .certification-card {
+  position: relative;
   display: flex;
   align-items: flex-start;
   gap: 16px;
-  padding: 22px 20px;
-  border: 1px solid var(--border);
-  border-radius: var(--radius-lg);
-  background: rgba(16,29,47,0.78);
-  box-shadow: var(--shadow-card);
-  transition: transform var(--transition), border-color var(--transition), box-shadow var(--transition);
+  padding: 24px 22px;
+  border: 1px solid rgba(148, 163, 184, 0.22);
+  border-radius: 22px;
+  background: linear-gradient(180deg, rgba(16,29,47,0.9), rgba(16,29,47,0.72));
+  box-shadow: 0 20px 45px rgba(2, 6, 23, 0.24);
+  overflow: hidden;
+  transition: transform 0.22s ease, border-color 0.22s ease, box-shadow 0.22s ease;
+}
+.certification-card::before {
+  content: "";
+  position: absolute;
+  inset: 0 0 auto 0;
+  height: 3px;
+  background: linear-gradient(90deg, var(--accent), var(--accent-strong), transparent);
+}
+.certification-card::after {
+  content: "";
+  position: absolute;
+  top: -36px;
+  right: -36px;
+  width: 120px;
+  height: 120px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(125, 211, 252, 0.32), transparent 62%);
+  pointer-events: none;
 }
 .certification-card:hover {
-  transform: translateY(-4px);
-  border-color: var(--border-strong);
-  box-shadow: var(--shadow-soft);
+  transform: translateY(-8px) scale(1.01);
+  border-color: rgba(125, 211, 252, 0.5);
+  box-shadow: 0 26px 54px rgba(96, 165, 250, 0.12);
 }
 .certification-icon {
-  width: 52px;
-  height: 52px;
-  border-radius: 14px;
+  position: relative;
+  z-index: 1;
+  width: 58px;
+  height: 58px;
+  border-radius: 18px;
   flex-shrink: 0;
   display: grid;
   place-items: center;
-  background: rgba(96,165,250,0.10);
-  border: 1px solid var(--border);
+  background: linear-gradient(135deg, rgba(96,165,250,0.18), rgba(125,211,252,0.18));
+  border: 1px solid rgba(125, 211, 252, 0.28);
   color: var(--accent-strong);
+  box-shadow: inset 0 1px 0 rgba(255,255,255,0.08), 0 12px 24px rgba(96,165,250,0.12);
+}
+.certification-copy {
+  position: relative;
+  z-index: 1;
 }
 .certification-copy h3 {
-  font-size: 1.1rem;
+  font-size: 1.12rem;
   margin-bottom: 8px;
   letter-spacing: -0.03em;
 }
@@ -668,7 +708,12 @@ html[data-theme="light"] .internship-card { background: rgba(255,255,255,0.8); }
   font-size: 0.95rem;
   line-height: 1.6;
 }
-html[data-theme="light"] .certification-card { background: rgba(255,255,255,0.82); }
+html[data-theme="light"] .certification-card {
+  background: linear-gradient(180deg, rgba(255,255,255,0.95), rgba(255,255,255,0.82));
+}
+html[data-theme="light"] .certification-card::before {
+  background: linear-gradient(90deg, var(--accent), var(--accent-strong), transparent);
+}
 
 .resume-card {
   max-width: 860px;
